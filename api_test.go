@@ -17,21 +17,21 @@ func TestGetMarkers(t *testing.T) {
 		t.Error(err)
 	}
 
-	if cc := len(m.Countries); cc != 47 {
-		t.Error("Expected 47 countries but got:", cc)
+	if cc := len(m.Countries); cc != 84 {
+		t.Error("Expected 84 countries but got:", cc)
 	}
 
-	c := m.Countries[6]
+	c := m.Countries[5]
 
-	if c.Latitude != "52.2413" {
+	if c.Latitude != 52.2413 {
 		t.Error("Unexpected lat:", c.Latitude)
 	}
 
-	if c.Longitude != "18.479" {
+	if c.Longitude != 18.479 {
 		t.Error("Unexpected lng:", c.Longitude)
 	}
 
-	if c.Zoom != "6" {
+	if c.Zoom != 6 {
 		t.Error("Unexpected zoom:", c.Zoom)
 	}
 
@@ -68,19 +68,19 @@ func TestGetMarkers(t *testing.T) {
 	}
 
 	ct := c.Cities[0]
-	if ct.Uid != "148" {
-		t.Error("Unexpected uid:", ct.Uid)
+	if ct.UID != 148 {
+		t.Error("Unexpected uid:", ct.UID)
 	}
 
-	if ct.Longitude != "17.0485" {
+	if ct.Longitude != 17.0485 {
 		t.Error("Unexpected lng:", ct.Longitude)
 	}
 
-	if ct.Latitude != "51.1097" {
+	if ct.Latitude != 51.1097 {
 		t.Error("Unexpected lat:", ct.Latitude)
 	}
 
-	if ct.Zoom != "13" {
+	if ct.Zoom != 13 {
 		t.Error("Unexpected zoom:", ct.Zoom)
 	}
 
@@ -100,20 +100,36 @@ func TestGetMarkers(t *testing.T) {
 		t.Error("Unexpected name:", ct.Name)
 	}
 
-	if len(ct.Places) != 73 {
+	if ct.Bounds.NorthEast.Latitude != 51.136 {
+		t.Error("Unexpected lat:", ct.Bounds.NorthEast.Latitude)
+	}
+
+	if ct.Bounds.NorthEast.Longitude != 17.1429 {
+		t.Error("Unexpected lng:", ct.Bounds.NorthEast.Longitude)
+	}
+
+	if ct.Bounds.SouthWest.Latitude != 51.048 {
+		t.Error("Unexpected lat:", ct.Bounds.SouthWest.Latitude)
+	}
+
+	if ct.Bounds.SouthWest.Longitude != 16.9605 {
+		t.Error("Unexpected lng:", ct.Bounds.SouthWest.Longitude)
+	}
+
+	if len(ct.Places) != 75 {
 		t.Error("Unexpected places:", len(ct.Places))
 	}
 
 	p := ct.Places[0]
-	if p.Uid != 349478 {
-		t.Error("Unexpected uid:", p.Uid)
+	if p.UID != 349478 {
+		t.Error("Unexpected uid:", p.UID)
 	}
 
-	if p.Latitude != "51.13207714749649" {
+	if p.Latitude != 51.132077147496 {
 		t.Error("Unexpected lat:", p.Latitude)
 	}
 
-	if p.Longitude != "17.06550121307373" {
+	if p.Longitude != 17.065501213074 {
 		t.Error("Unexpected lng:", p.Longitude)
 	}
 
@@ -121,23 +137,23 @@ func TestGetMarkers(t *testing.T) {
 		t.Error("Unexpected name:", p.Name)
 	}
 
-	if p.Spot != "1" {
+	if p.Spot != 1 {
 		t.Error("Unexpected spot:", p.Spot)
 	}
 
-	if p.Number != "5901" {
+	if p.Number != 5901 {
 		t.Error("Unexpected number:", p.Number)
 	}
 
-	if p.Bikes != "5+" {
+	if p.Bikes != 5 {
 		t.Error("Unexpected bikes:", p.Bikes)
 	}
 
-	if p.Racks != "16" {
+	if p.Racks != 15 {
 		t.Error("Unexpected racks:", p.Racks)
 	}
 
-	if p.TerminalType != "unknown" {
+	if p.TerminalType != "" {
 		t.Error("Unexpected terminal_type:", p.TerminalType)
 	}
 
@@ -145,7 +161,7 @@ func TestGetMarkers(t *testing.T) {
 		t.Error("Unexpected bike numbers:", len(p.Numbers))
 	}
 
-	expected := []string{"57710", "57266", "57082", "57655", "57697"}
+	expected := []string{"57301", "57056", "57044", "57680", "57478"}
 	for i, num := range p.Numbers {
 		if num != expected[i] {
 			t.Error("Unexpected number:", num)
